@@ -12,7 +12,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"sync/atomic"
 	"time"
 )
 
@@ -20,7 +19,9 @@ var gradioURLs = []string{
 	"https://paddlepaddle-paddleocr-vl-1-6-online-demo.hf.space/gradio_api",
 	"https://paddlepaddle-paddleocr-vl-1-6-online-demo.ms.show/gradio_api",
 }
-var gradioRR atomic.Uint64
+func pickGradioURL() string {
+	return gradioURLs[rand.Intn(len(gradioURLs))]
+}
 
 func debugf(format string, args ...any) {
 	if os.Getenv("DEBUG") != "" {

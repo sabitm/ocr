@@ -20,7 +20,7 @@ func main() {
 	imagePath := os.Args[1]
 
 	client := &http.Client{Timeout: 120 * time.Second}
-	baseURL := gradioURLs[gradioRR.Add(1)%uint64(len(gradioURLs))]
+	baseURL := pickGradioURL()
 
 	serverPath, err := upload(client, baseURL, imagePath)
 	if err != nil {
